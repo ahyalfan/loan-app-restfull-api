@@ -7,6 +7,7 @@ import com.enigma.bank.dto.response.CustomerResponse;
 import com.enigma.bank.dto.response.WebResponse;
 import com.enigma.bank.entity.User;
 import com.enigma.bank.service.CustomerService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping(path = ApiUrl.CUSTOMER_API)
 // @PreAuthorize("hasRole('ROLE_ADMIN')") // cek role admin
+@SecurityRequirement(name = "Authorization")
 public class CustomerController {
     private final CustomerService customerService;
     // Customer endpoints
