@@ -1,5 +1,6 @@
 package com.enigma.bank.security;
 
+import com.enigma.bank.constant.ApiUrl;
 import com.enigma.bank.resolver.UserArgumentResolver;
 import jakarta.servlet.DispatcherType;
 import lombok.RequiredArgsConstructor;
@@ -33,8 +34,9 @@ public class SecurityConfiguration implements WebMvcConfigurer {
     private final EntryPointImpl authenticationEntryPoint;
 
     private static final String[] WHITE_LIST_URL = {
-            "/api/v1/auth/**"
-
+            "/api/v1/auth/**",
+            "/swagger-ui/**",
+            "/v3/api-docs/**"
     };
 
     @Bean
@@ -67,9 +69,12 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                         req.dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
                                 .requestMatchers(WHITE_LIST_URL)
                                 .permitAll()
-                                .requestMatchers("/api/v1/customer/**").hasAnyAuthority(new String[]{"ROLE_STAFF", "ROLE_ADMIN","ROLE_CUSTOMER"})
-                                .requestMatchers("/api/v1/instalment-types/**").hasAnyAuthority(new String[]{"ROLE_STAFF", "ROLE_ADMIN"})
-                                .requestMatchers(HttpMethod.GET,"/api/v1/test").hasAuthority("ROLE_ADMIN")
+                                .requestMatchers(ApiUrl.CUSTOMER_API +"/**").hasAnyAuthority("ROLE_CUSTOMER","ROLE_ADMIN")
+                                .requestMatchers(
+                                        ApiUrl.INSTALMENT_TYPE_API+"/**",
+                                        ApiUrl.LOAN_TYPE+"/**",
+                                        ApiUrl.TRANSACTION_API+"/**"
+                                        ).hasAnyAuthority("ROLE_ADMIN")
                                 .anyRequest()
                                 .authenticated()
                 )

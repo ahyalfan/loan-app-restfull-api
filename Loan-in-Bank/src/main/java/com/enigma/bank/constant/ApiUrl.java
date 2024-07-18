@@ -7,6 +7,8 @@ public class ApiUrl {
     public static final String AUTH_API = "/api/v1/auth";
     public static final String USER_API = "/api/v1/user";
     public static final String UPLOAD_API = "/api/v1/upload";
-    public static final String INSTALMENT_TYPE_API = "/api/v1/instalment-types`";
+    public static final String INSTALMENT_TYPE_API = "/api/v1/instalment-types";
+    public static final String LOAN_TYPE = "/api/v1/loan-type";
+//    public static final String LOAN_TRANSACTION = "/api/v1/loan-transactions";
 
 }

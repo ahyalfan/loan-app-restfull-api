@@ -7,6 +7,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.enigma.bank.entity.AppUser;
 import com.enigma.bank.entity.Role;
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -15,13 +16,14 @@ import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @Component
 public class JwtUtil {
-    @Value("${app.tokonyadiashop.jwt.jwt-secret}")
+    @Value("${app.loan.jwt.jwt-secret}")
     private String jwtSecret;
-    @Value("${app.tokonyadiashop.jwt.app-name}")
+    @Value("${app.loan.jwt.app-name}")
     private String appName;
-    @Value("${app.tokonyadiashop.jwt.expired}")
+    @Value("${app.loan.jwt.expired}")
     private long jwtExpired;
 
     private Algorithm algorithm;

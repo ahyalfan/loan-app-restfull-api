@@ -1,18 +1,18 @@
 package com.enigma.bank.dto.request;
 
+import com.enigma.bank.entity.InstalmentType;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @Builder
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginRequest {
-    @NotBlank
-    private String email;
-    @NotBlank
-    private String password;
+public class CreateInstalmentTypeRequest {
+    @NotNull
+    private InstalmentType.EInstalmentType instalmentType;
 }

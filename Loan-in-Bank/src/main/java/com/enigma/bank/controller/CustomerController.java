@@ -77,13 +77,13 @@ public class CustomerController {
     }
     @GetMapping(
             path = "/all",
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
     public WebResponse<List<CustomerResponse>> getAll(User user){
         List<CustomerResponse> response = customerService.getAll(user);
         return WebResponse.<List<CustomerResponse>>builder()
                .statusCode(HttpStatusCode.valueOf(200))
+                .message("success response")
                .data(response)
                .build();
     }

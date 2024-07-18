@@ -10,6 +10,7 @@ import com.enigma.bank.entity.User;
 import com.enigma.bank.repository.UserRepository;
 import com.enigma.bank.security.JwtUtil;
 import com.enigma.bank.service.AuthService;
+import com.enigma.bank.service.CustomerService;
 import com.enigma.bank.service.RoleService;
 import com.enigma.bank.service.ValidationService;
 import jakarta.transaction.Transactional;
@@ -37,6 +38,7 @@ public class AuthServiceImpl implements AuthService {
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
+    private final CustomerService customerService;
 
     @Override
     @Transactional
@@ -57,6 +59,7 @@ public class AuthServiceImpl implements AuthService {
                 .build();
 
         userRepository.save(user);
+        customerService.create(user, request.getCreateCustomer());
         return RegisterResponse.builder()
                 .email(user.getEmail())
                 .roles(Set.of(role.getName()))

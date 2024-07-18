@@ -1,5 +1,6 @@
 package com.enigma.bank.dto.request;
 
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,9 +11,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginRequest {
+public class LoanTypeCreateRequest {
     @NotBlank
-    private String email;
+    private String type;
     @NotBlank
-    private String password;
+    private Double maxLoan;
 }

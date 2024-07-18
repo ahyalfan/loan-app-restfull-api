@@ -20,7 +20,7 @@ public class Role {
     private String id;
     @Enumerated(EnumType.STRING)
     private ERole name; // Enum
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
     private Set<User> users;
 
 
