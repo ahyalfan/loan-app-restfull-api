@@ -31,7 +31,7 @@ public class UploadController {
         String fileName = uploadService.storeFile(avatar, user);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(ApiUrl.CUSTOMER_API)
+                .path(ApiUrl.UPLOAD_API)
                 .path("/avatar/")
                 .path(fileName)
                 .toUriString();
@@ -50,7 +50,7 @@ public class UploadController {
         return ResponseEntity.status(HttpStatus.CREATED).body(commonResponse);
     }
 
-    @GetMapping("/avatar/{filename:.+}")
+    @GetMapping("/avatar/{filename}")
     public ResponseEntity<byte[]> getAvatar(@PathVariable String filename) {
         byte[] bytes = uploadService.loadFileAsBytes(filename);
         return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(bytes);

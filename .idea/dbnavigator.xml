@@ -18,7 +18,9 @@
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="59caf69a-484a-4067-91d2-e267c3941465">
       <console name="Connection" type="STANDARD" schema="public" session="Main"><![CDATA[select * from m_customer;
-select * from m_user;]]></console>
+select * from m_user;
+select * from m_profile_picture;
+select * from m_profile_picture where name = '4f0449a4-2c52-41e1-bf3b-422bdec54a6c_Screenshotfrom2024-07-1107-56-13.png']]></console>
     </connection>
     <connection id="61a161fa-baa4-4fe4-8d87-2d5af861ba15">
       <console name="Connection 1" type="STANDARD" schema="" session="Main" />
@@ -28,7 +30,9 @@ select * from m_user;]]></console>
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="59caf69a-484a-4067-91d2-e267c3941465" object-ref="consoles/Connection" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="59caf69a-484a-4067-91d2-e267c3941465" />

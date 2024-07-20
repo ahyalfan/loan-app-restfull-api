@@ -65,6 +65,7 @@ public class UploadServiceImpl implements UploadService {
 
     public byte[] loadFileAsBytes(String fileName) {
         Path filePath = fileStorageLocation.resolve(fileName);
+        System.out.println(filePath);
         if (!Files.exists(filePath)) {
             throw new ResponseStatusException(HttpStatusCode.valueOf(404),fileName+" not found");
         }
