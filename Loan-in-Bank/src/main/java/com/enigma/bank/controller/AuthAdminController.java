@@ -1,14 +1,11 @@
 package com.enigma.bank.controller;
 
 import com.enigma.bank.constant.ApiUrl;
-import com.enigma.bank.dto.request.LoginRequest;
 import com.enigma.bank.dto.request.RegisterRequest;
-import com.enigma.bank.dto.response.LoginResponse;
 import com.enigma.bank.dto.response.RegisterResponse;
 import com.enigma.bank.dto.response.WebResponse;
 import com.enigma.bank.service.AuthService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,11 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Slf4j
 @RestController
-@RequestMapping(path = ApiUrl.AUTH_API)
+@RequestMapping(ApiUrl.AUTH_API_ADMIN)
 @RequiredArgsConstructor
-public class AuthController {
+public class AuthAdminController {
     private final AuthService authService;
     // Login and Registration methods
     @PostMapping(
@@ -29,26 +25,10 @@ public class AuthController {
             produces = "application/json"
     )
     public WebResponse<RegisterResponse> register(@RequestBody RegisterRequest request) {
-        log.info("Register");
-        var response = authService.register(request,false);
+        var response = authService.register(request,true);
         return WebResponse.<RegisterResponse>builder()
                 .statusCode(HttpStatusCode.valueOf(200))
                 .message("User registered successfully")
-                .data(response)
-                .build();
-    }
-    @PostMapping(
-            value = "/login",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = "application/json"
-    )
-    public WebResponse<LoginResponse> login(@RequestBody LoginRequest request) {
-        // Implement login logic
-        // Return JWT token
-        var response = authService.login(request);
-        return WebResponse.<LoginResponse>builder()
-                .statusCode(HttpStatusCode.valueOf(200))
-                .message("User logged in successfully")
                 .data(response)
                 .build();
     }

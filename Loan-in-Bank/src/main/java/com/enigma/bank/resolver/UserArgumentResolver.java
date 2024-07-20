@@ -6,6 +6,7 @@ import com.enigma.bank.security.JwtUtil;
 import com.enigma.bank.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Map;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class UserArgumentResolver implements HandlerMethodArgumentResolver {
@@ -40,6 +42,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
     @Override // maka method ini akan dijalankan
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 //        HttpServletRequest servletRequest = (HttpServletRequest) webRequest.getNativeRequest();
+
         String headerAuth = webRequest.getHeader(HttpHeaders.AUTHORIZATION);
         if (headerAuth == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid API token");
@@ -59,6 +62,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 //                request.setAttribute("userId",userInfo.get("userId")); // cari user denga id seusui
             var userLast = userRepository.findById(userInfo.get("userId")).orElseThrow(()-> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid API token"));
+            log.info("test resolver");
             return userLast;
         }
         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid API token");

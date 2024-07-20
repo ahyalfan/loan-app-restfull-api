@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService {
         System.out.println(user.toString());
         var roles = roleRepository.findAllByUsers(user);
         var rolesName = roles.stream().map(Role::getName).collect(Collectors.toSet());
+//        var rolesName = user.getRoles().stream().map(Role::getName).collect(Collectors.toSet());
 
         return AppUser.builder()
                 .Id(user.getId())
@@ -44,6 +45,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("Invalid creadential user"));
         var roles = roleRepository.findAllByUsers(user);
         var rolesName = roles.stream().map(Role::getName).collect(Collectors.toSet());
+//        var rolesName = user.getRoles().stream().map(Role::getName).collect(Collectors.toSet());
         return AppUser.builder()
                 .Id(user.getId())
                 .username(user.getEmail())

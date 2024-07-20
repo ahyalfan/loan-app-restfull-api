@@ -6,7 +6,7 @@ import com.enigma.bank.dto.response.LoginResponse;
 import com.enigma.bank.dto.response.RegisterResponse;
 
 public interface AuthService {
-    RegisterResponse register(RegisterRequest request);
+    RegisterResponse register(RegisterRequest request,boolean admin);
 
     LoginResponse login(LoginRequest request);
 }

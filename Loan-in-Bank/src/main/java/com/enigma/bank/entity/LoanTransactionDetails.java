@@ -22,9 +22,9 @@ public class LoanTransactionDetails {
     private LoanStatus loanStatus; // enum
     private Long createdAt;
     private Long updatedAt;
-    @ManyToOne
-    @JoinColumn(name = "guarantee_picture_id")
-    private GuaranteePicture guaranteePicture;
+//    @OneToOne
+//    @JoinColumn(name = "guarantee_picture_id")
+//    private GuaranteePicture guaranteePicture;
 
     public enum LoanStatus {
         PAID,

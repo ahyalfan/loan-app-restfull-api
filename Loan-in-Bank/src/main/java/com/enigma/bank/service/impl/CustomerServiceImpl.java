@@ -10,6 +10,7 @@ import com.enigma.bank.service.CustomerService;
 import com.enigma.bank.service.ValidationService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -17,6 +18,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
@@ -27,6 +29,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public CustomerResponse create(User user, CustomerCreateRequest request) {
         validationService.validate(request);
+        log.info("create customer");
 
         Customer customer = new Customer();
         customer.setFirstName(request.getFirstName());

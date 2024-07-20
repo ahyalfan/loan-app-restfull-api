@@ -70,11 +70,12 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                                 .requestMatchers(WHITE_LIST_URL)
                                 .permitAll()
                                 .requestMatchers(ApiUrl.CUSTOMER_API +"/**").hasAnyAuthority("ROLE_CUSTOMER","ROLE_ADMIN")
+                                .requestMatchers(HttpMethod.PUT,ApiUrl.TRANSACTION_API+"/**").hasAnyAuthority("ROLE_ADMIN","ROLE_STAFF") //
+                                .requestMatchers(HttpMethod.POST,ApiUrl.TRANSACTION_API+"/**").hasAnyAuthority("ROLE_CUSTOMER") //
                                 .requestMatchers(
                                         ApiUrl.INSTALMENT_TYPE_API+"/**",
-                                        ApiUrl.LOAN_TYPE+"/**",
-                                        ApiUrl.TRANSACTION_API+"/**"
-                                        ).hasAnyAuthority("ROLE_ADMIN")
+                                        ApiUrl.LOAN_TYPE+"/**"
+                                        ).hasAnyAuthority("ROLE_ADMIN","ROLE_STAFF")
                                 .anyRequest()
                                 .authenticated()
                 )

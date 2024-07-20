@@ -21,6 +21,6 @@ public class GuaranteePicture {
     private String name;
     private String path;
     private Long size;
-    @OneToMany(mappedBy = "guaranteePicture")
-    private Set<LoanTransactionDetails> loans;
+//    @OneToOne(mappedBy = "guaranteePicture")
+//    private LoanTransactionDetails loan;
 }

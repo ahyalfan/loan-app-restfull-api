@@ -42,15 +42,20 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     @Transactional
-    public RegisterResponse register(RegisterRequest request) {
+    public RegisterResponse register(RegisterRequest request,boolean admin) {
         validationService.validate(request);
         Optional<User> i = userRepository.findByEmail(request.getEmail());
         if (i.isPresent()){
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already exists");
         }
 
-        Role role = roleService.getOrSave(Role.ERole.ROLE_CUSTOMER);
-        System.out.println(role.getName());
+        Role role;
+        if (admin) {
+            role = roleService.getOrSave(Role.ERole.ROLE_ADMIN);
+        }else {
+            role = roleService.getOrSave(Role.ERole.ROLE_CUSTOMER);
+        }
+
         User user = User.builder()
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
@@ -70,7 +75,6 @@ public class AuthServiceImpl implements AuthService {
     public LoginResponse login(LoginRequest request) {
         validationService.validate(request);
 
-        log.info(request.getEmail());
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
