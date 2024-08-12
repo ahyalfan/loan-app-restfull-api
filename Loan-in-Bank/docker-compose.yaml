@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  postgres_loan:
+    image: postgres
+    container_name: postgres_loan
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=loan_db
+    volumes:
+      - "postgres-data2:/data/db"
+#    ports:
+#      - "5431:5432"
+
+#  postgres_loan_2:
+#    image: postgres
+#    container_name: postgres_loan_2
+#    expose:
+#      - 5432
+#    environment:
+#      - POSTGRES_USER=root
+#      - POSTGRES_PASSWORD=root
+#      - POSTGRES_DB=loan_db
+#    volumes:
+#      - "postgres-data2:/data/db"
+##    ports:
+##      - "5431:5432"
+
+  loan-app:
+    container_name: loan-app
+    build:
+      context: ./target
+      dockerfile: Dockerfile
+    image: "app-loan-image"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres_loan
+
+volumes:
+  postgres-data2:
+    name: postgres-data2

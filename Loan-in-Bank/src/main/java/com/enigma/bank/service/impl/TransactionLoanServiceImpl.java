@@ -75,6 +75,7 @@ public class TransactionLoanServiceImpl implements TransactionLoanService {
             LoanTransactionDetails loanTransactionDetails = loanTransactionDetailsRepository.findFirstByLoans(loan)
                    .orElseThrow(() -> new ResponseStatusException(HttpStatusCode.valueOf(404), "Could not find loan type"));
             loan.setApprovedBy(user.getEmail());
+            loanTransactionDetails.setNominal(loanTransactionDetails.getNominal() + (loanTransactionDetails.getNominal() * request.getInterestRates()));
             loan.setUpdatedAt(new Date().getTime());
             loanRepository.save(loan);
             loanTransactionDetails.setTransactionDate(new Date().getTime());
